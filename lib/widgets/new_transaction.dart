@@ -1,20 +1,49 @@
 import 'package:intl/intl.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../widgets/adaptive.dart';
 
 class NewTransaction extends StatefulWidget {
   final Function addNewTransaction;
 
-  NewTransaction(this.addNewTransaction);
+  NewTransaction(this.addNewTransaction) {
+    print('Constructor NewTransaction');
+  }
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewTransactionState createState() {
+    print('createState NewTransaction');
+    return _NewTransactionState();
+  }
 }
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate;
+
+  _NewTransactionState() {
+    print('Constructor _NewTransactionState');
+  }
+
+  @override
+  void initState() {
+    print('initState _NewTransactionState');
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant NewTransaction oldWidget) {
+    print('didUpdateWidget _NewTransactionState');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    print('dispose _NewTransactionState');
+    super.dispose();
+  }
 
   void _submitData() {
     if (_amountController.text.isEmpty) return;
@@ -90,16 +119,7 @@ class _NewTransactionState extends State<NewTransaction> {
                             : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                       ),
                     ),
-                    FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      onPressed: _presentDatePicker,
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
+                    AdaptiveFlatButton('Choose Date', _presentDatePicker),
                   ],
                 ),
               ),
